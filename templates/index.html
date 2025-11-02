@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="chat h1">bienvenu sur ce chat</h1>
+        <h3>Posez vos questions et obtenez des réponses instantanées !</h3>
+    </header>
+
+    <div class="chat-container">
+        <h1>💬 parler avec ChatGPT</h1>
+
+        <div id="chat-box" class="chat-box"></div>
+
+        <form id="chat-form">
+            <input type="text" id="question" name="question" placeholder="Pose ta question..." required>
+            <button type="submit">Envoyer</button>
+        </form>
+
+        <div id="loader" class="loader hidden">ChatGPT réfléchit<span class="dots">...</span></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('chat-form');
+        const chatBox = document.getElementById('chat-box');
+        const loader = document.getElementById('loader');
+        const dots = document.querySelector('.dots');
+
+        // Animation des points "..."
+        setInterval(() => {
+            dots.textContent = dots.textContent.length < 3 ? dots.textContent + '.' : '.';
+        }, 500);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const question = document.getElementById('question').value.trim();
+            if (!question) return;
+
+            chatBox.innerHTML += `<p class="user-msg"><strong>Toi :</strong> ${question}</p>`;
+            document.getElementById('question').value = '';
+
+            loader.classList.remove('hidden');
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ question })
+                });
+
+                const data = await response.json();
+
+                loader.classList.add('hidden');
+
+                chatBox.innerHTML += `<p class="bot-msg"><strong>ChatGPT :</strong> ${data.answer}</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+            } catch (err) {
+                loader.classList.add('hidden');
+                chatBox.innerHTML += `<p class="error-msg">❌ Erreur : ${err}</p>`;
+            }
+        });
+
+        // Animation du header h1
+        const chat = document.querySelector('.chat');
+        const mesclasse = ["h1", "h12", "h123"];
+        let index = 0;
+
+        const animation = () => {
+            chat.className = "chat " + mesclasse[index];
+            index = (index + 1) % mesclasse.length;
+        }
+
+        setInterval(animation, 2000);
+    </script>
+</body>
+</html>

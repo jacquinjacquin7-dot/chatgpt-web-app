@@ -1,0 +1,119 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ABE2, #5563DE);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.chat-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 420px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.chat-box {
+    background: #f4f4f4;
+    height: 350px;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+}
+
+.user-msg {
+    background-color: #d1e7ff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 5px 0;
+    text-align: right;
+}
+
+.bot-msg {
+    background-color: #e9ffe6;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.error-msg {
+    background-color: #ffe0e0;
+    color: #b00;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+input[type="text"] {
+    width: 75%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+}
+
+button {
+    padding: 15px 20px;
+    border: none;
+    background-color: #5563DE;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin: 20px auto 0 auto;
+}
+
+button:hover {
+    background-color: #3943B7;
+}
+
+.loader {
+    text-align: center;
+    color: #444;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Animation du header */
+.h1 {
+    font-size: 50px;
+    background-color: #444;
+    color: #d1e7ff;
+    padding: 20px 25px;
+}
+
+.h12 {
+    font-size: 50px;
+    background-color: #2b2db9;
+    color: #2aca25;
+    padding: 20px 25px;
+}
+
+.h123 {
+    font-size: 50px;
+    background-color: #cf8626;
+    color: #38a9eb;
+    padding: 20px 25px;
+}
