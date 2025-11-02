@@ -10,10 +10,11 @@
     <header>
         <h1 class="chat h1">bienvenu sur ce chat</h1>
         <h3>Posez vos questions et obtenez des réponses instantanées !</h3>
+        <a href="{{ url_for('history') }}" class="link">Voir l'historique des conversations</a>
     </header>
 
     <div class="chat-container">
-        <h1>💬 parler avec ChatGPT</h1>
+        <h1>💬 Parler avec ChatGPT</h1>
 
         <div id="chat-box" class="chat-box"></div>
 
@@ -36,6 +37,26 @@
             dots.textContent = dots.textContent.length < 3 ? dots.textContent + '.' : '.';
         }, 500);
 
+        // Fonction pour colorer certains mots
+        function colorizeText(text) {
+            const keywords = {
+                "ChatGPT": "#0078ff",
+                "bonjour": "#22a7f0",
+                "merci": "#28a745",
+                "erreur": "#dc3545",
+                "assistant": "#ff9900",
+                "réponse": "#a832a8",
+                "question": "#ff6600"
+            };
+
+            for (const [word, color] of Object.entries(keywords)) {
+                const regex = new RegExp(`\\b${word}\\b`, "gi");
+                text = text.replace(regex, `<span style="color:${color}; font-weight:bold;">${word}</span>`);
+            }
+
+            return text;
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const question = document.getElementById('question').value.trim();
@@ -57,7 +78,7 @@
 
                 loader.classList.add('hidden');
 
-                chatBox.innerHTML += `<p class="bot-msg"><strong>ChatGPT :</strong> ${data.answer}</p>`;
+                chatBox.innerHTML += `<p class="bot-msg"><strong>ChatGPT :</strong> ${colorizeText(data.answer)}</p>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
 
             } catch (err) {
@@ -74,7 +95,7 @@
         const animation = () => {
             chat.className = "chat " + mesclasse[index];
             index = (index + 1) % mesclasse.length;
-        }
+        };
 
         setInterval(animation, 2000);
     </script>

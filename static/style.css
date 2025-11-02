@@ -1,3 +1,4 @@
+/* ===== STYLE GLOBAL ===== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #74ABE2, #5563DE);
@@ -6,52 +7,79 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding-top: 20px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* ✅ espace plus équilibré */
     color: white;
 }
 
-.chat-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    width: 420px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+.link {
+    color: #fff;
+    background-color: #2b2db9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+    margin-top: 8px;
 }
 
+.link:hover {
+    background-color: #1f2196;
+}
+
+/* ===== CADRE PRINCIPAL ===== */
+.chat-container {
+    background-color: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 600px; /* ✅ un peu plus large */
+    max-width: 95%;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+}
+
+/* ===== TITRES ===== */
 h1 {
     color: #333;
     text-align: center;
 }
 
+/* ===== ZONE DU CHAT ===== */
 .chat-box {
     background: #f4f4f4;
-    height: 350px;
+    height: 380px; /* ✅ un peu moins haut */
     overflow-y: auto;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
+/* ===== MESSAGES ===== */
 .user-msg {
     background-color: #d1e7ff;
-    padding: 8px 12px;
-    border-radius: 10px;
-    margin: 5px 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin: 6px 0;
     text-align: right;
+    word-wrap: break-word;
 }
 
 .bot-msg {
     background-color: #e9ffe6;
-    padding: 8px 12px;
-    border-radius: 10px;
-    margin: 5px 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin: 6px 0;
     text-align: left;
+    word-wrap: break-word;
 }
 
 .error-msg {
@@ -62,24 +90,32 @@ h1 {
     margin: 5px 0;
 }
 
+/* ===== CHAMP ET BOUTON ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 input[type="text"] {
-    width: 75%;
-    padding: 10px;
+    width: 90%;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 10px;
     outline: none;
+    font-size: 16px;
 }
 
 button {
-    padding: 15px 20px;
+    padding: 14px 25px;
     border: none;
     background-color: #5563DE;
     color: white;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
-    display: block;
-    margin: 20px auto 0 auto;
+    margin-top: 15px;
+    font-size: 16px;
 }
 
 button:hover {
@@ -96,24 +132,95 @@ button:hover {
     display: none;
 }
 
-/* Animation du header */
+/* ===== HEADER ANIMATION ===== */
 .h1 {
-    font-size: 50px;
+    font-size: 42px;
     background-color: #444;
     color: #d1e7ff;
-    padding: 20px 25px;
+    padding: 12px 18px;
+    border-radius: 12px;
 }
 
 .h12 {
-    font-size: 50px;
+    font-size: 42px;
     background-color: #2b2db9;
     color: #2aca25;
-    padding: 20px 25px;
+    padding: 12px 18px;
+    border-radius: 12px;
 }
 
 .h123 {
-    font-size: 50px;
+    font-size: 42px;
     background-color: #cf8626;
     color: #38a9eb;
-    padding: 20px 25px;
+    padding: 12px 18px;
+    border-radius: 12px;
+}
+
+/* ===== SCROLLBAR PERSONNALISÉ ===== */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* --- Tablettes --- */
+@media screen and (max-width: 768px) {
+    .chat-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .chat-box {
+        height: 350px;
+    }
+
+    .h1, .h12, .h123 {
+        font-size: 34px;
+        padding: 10px 15px;
+    }
+
+    button {
+        width: 80%;
+    }
+}
+
+/* --- Téléphones --- */
+@media screen and (max-width: 480px) {
+    .chat-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .chat-box {
+        height: 320px;
+        font-size: 14px;
+    }
+
+    .h1, .h12, .h123 {
+        font-size: 26px;
+        padding: 8px 10px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    .link {
+        font-size: 14px;
+    }
 }
